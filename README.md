@@ -21,7 +21,7 @@ InkVerse - Marketplace para o mercado de tatuagem
 - [Esqueceu Senha](#esqueceu-senha)
 - [Criar conta](#criar-conta)
 
-### Login
+## Login
 
 `POST` /login : Realiza a autenticação do usuário tatuador utilizando email e senha.
 
@@ -59,7 +59,7 @@ InkVerse - Marketplace para o mercado de tatuagem
 |401|Credenciais inválidas. Verifique o email e senha fornecidos
 |404|Usuário não encontrado
 
-### Login Apple
+## Login Apple
 
 `POST` /login/apple : Realiza a autenticação do usuário tatuador utilizando a autenticação da Apple.
 
@@ -94,7 +94,7 @@ InkVerse - Marketplace para o mercado de tatuagem
 |400|Validação falhou. Verifique o corpo da requisição
 |401|Credenciais inválidas. Verifique o email e senha fornecidos
 
-#### Login Google
+## Login Google
 
 `POST` /login/google : Realiza a autenticação do usuário tatuador utilizando a autenticação do Google.
 
@@ -129,7 +129,7 @@ InkVerse - Marketplace para o mercado de tatuagem
 |400|Validação falhou. Verifique o corpo da requisição
 |401|Credenciais inválidas. Verifique o email e senha fornecidos
 
-#### Esqueceu Senha
+## Esqueceu Senha
 
 `POST` /esqueceu-senha : Envia um email de recuperação de senha para o usuário tatuador.
 
@@ -164,7 +164,7 @@ InkVerse - Marketplace para o mercado de tatuagem
 |400|Validação falhou. Verifique o corpo da requisição
 |404|Usuário não encontrado
 
-#### Criar Conta
+## Criar Conta
 
 `POST` /criar-conta : Cria uma nova conta de usuário tatuador.
 
