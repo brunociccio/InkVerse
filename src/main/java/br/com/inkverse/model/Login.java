@@ -1,6 +1,4 @@
-package main.java.br.com.inkverse.model;
-
-import java.util.Random;
+package br.com.inkverse.model;
 
 public record Login(String nome, String email, String senha) {
 

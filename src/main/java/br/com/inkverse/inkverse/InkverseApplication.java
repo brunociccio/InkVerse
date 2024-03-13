@@ -2,7 +2,6 @@ package br.com.inkverse.inkverse;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.junit.jupiter.api.Test;
 
 @SpringBootApplication
 public class InkverseApplication {
