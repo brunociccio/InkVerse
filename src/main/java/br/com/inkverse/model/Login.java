@@ -1,10 +1,18 @@
 package br.com.inkverse.model;
 
-public record Login(String nome, String email, String senha) {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
 
-    public Login(String nome, String email, String senha) {
-    this.nome = nome;
-    this.email = email;
-    this.senha = senha;
-    }
+@Data
+@Entity
+public class Login {
+    
+        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        private String nome;
+        private String email;
+        private String senha;
+
 }
