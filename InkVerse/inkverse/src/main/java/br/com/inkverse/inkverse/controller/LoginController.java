@@ -1,8 +1,6 @@
 package br.com.inkverse.inkverse.controller;
 
-import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
