@@ -1,20 +1,25 @@
 package br.com.inkverse.inkverse.controller;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.com.inkverse.inkverse.model.Login;
 import br.com.inkverse.inkverse.repository.LoginRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -50,9 +55,32 @@ public class LoginController {
                     .orElse(ResponseEntity.notFound().build());
     }
     
-    // PUT
+// PUT
+@PutMapping("{id}")
+public Login update(@PathVariable String id, @RequestBody Login login) {
+    log.info("atualizando login {} para {}", id, login);
 
+    verificarSeLoginExiste(id);
+    login.setId(Long.valueOf(id));
+    return repository.save(login);
+}
 
-    // DELETE
+// DELETE
+@DeleteMapping("{id}")
+@ResponseStatus(NO_CONTENT)
+public void destroy(@PathVariable String id) {
+    log.info("apagando login {}", id);
 
+    verificarSeLoginExiste(id);
+    repository.deleteById(id);
+}
+
+private void verificarSeLoginExiste(String id) {
+    repository
+            .findById(id)
+            .orElseThrow(
+                    () -> new ResponseStatusException(
+                            NOT_FOUND,
+                            "Não existe login com o id informado"));
+}
 }

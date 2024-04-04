@@ -9,10 +9,14 @@ import lombok.Data;
 @Data
 @Entity
 public class Login {
-    
+
         @Id @GeneratedValue(strategy = GenerationType.AUTO)
         private String nome;
         private String email;
         private String senha;
+        public void setId(Long valueOf) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'setId'");
+        }
 
 }
