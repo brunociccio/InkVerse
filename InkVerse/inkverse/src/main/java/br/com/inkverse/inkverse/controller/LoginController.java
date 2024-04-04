@@ -17,6 +17,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.inkverse.inkverse.model.Login;
 import br.com.inkverse.inkverse.repository.LoginRepository;
+import br.com.inkverse.inkverse.validation.TipoLogin;
+import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -75,6 +77,14 @@ public void destroy(@PathVariable String id) {
     repository.deleteById(id);
 }
 
+// TESTE DE IMPLEMENTAÇÃO DE METODOS PARA MENSAGENS DE VALIDAÇÃO
+    @TipoLogin(message = "{login.tipo.message}")
+    private String tipo;
+
+    @NotBlank(message = "{login.descricao.notblank}")
+    private String descricao;
+
+//
 private void verificarSeLoginExiste(String id) {
     repository
             .findById(id)
