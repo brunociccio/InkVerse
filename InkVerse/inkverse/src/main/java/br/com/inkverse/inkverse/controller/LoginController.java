@@ -48,7 +48,7 @@ public class LoginController {
 
     // GET
     @GetMapping("{id}")
-    public ResponseEntity<Login> show(@PathVariable String id){
+    public ResponseEntity<Login> show(@PathVariable Long id){
         log.info("buscando login com id {}", id);
 
         return repository
@@ -59,7 +59,7 @@ public class LoginController {
     
 // PUT
 @PutMapping("{id}")
-public Login update(@PathVariable String id, @RequestBody Login login) {
+public Login update(@PathVariable Long id, @RequestBody Login login) {
     log.info("atualizando login {} para {}", id, login);
 
     verificarSeLoginExiste(id);
@@ -70,7 +70,7 @@ public Login update(@PathVariable String id, @RequestBody Login login) {
 // DELETE
 @DeleteMapping("{id}")
 @ResponseStatus(NO_CONTENT)
-public void destroy(@PathVariable String id) {
+public void destroy(@PathVariable Long id) {
     log.info("apagando login {}", id);
 
     verificarSeLoginExiste(id);
@@ -85,7 +85,7 @@ public void destroy(@PathVariable String id) {
     private String descricao;
 
 //
-private void verificarSeLoginExiste(String id) {
+private void verificarSeLoginExiste(Long id) {
     repository
             .findById(id)
             .orElseThrow(
