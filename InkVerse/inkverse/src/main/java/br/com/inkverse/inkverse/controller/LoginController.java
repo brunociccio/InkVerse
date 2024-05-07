@@ -6,6 +6,8 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.inkverse.inkverse.model.Login;
 import br.com.inkverse.inkverse.repository.LoginRepository;
 import br.com.inkverse.inkverse.validation.TipoLogin;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,12 +32,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("login")
 @Slf4j
+@CacheConfig(cacheNames = "login")
+@Tag(name = "login")
 public class LoginController {
 
     @Autowired
     LoginRepository repository;
 
     @GetMapping()    
+    @Cacheable
+    @Operation(
+        summary = "Login",
+        description = "Opções de Login"
+    )
     public List<Login> index() {
         return repository.findAll();
     }
