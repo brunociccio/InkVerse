@@ -56,34 +56,45 @@ public class CadastroController {
         return repository.save(cadastro);
     }
 
-    // GET
-    @GetMapping("{id}")
-    public ResponseEntity<Cadastro> show(@PathVariable Long id) {
-        return repository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    // PUT
-    @PutMapping("{id}")
-    @CacheEvict(allEntries = true)
-    public Cadastro update(@PathVariable Long id, @Valid @RequestBody Cadastro cadastro) {
-        log.info("Atualizando cadastro {} para {}", id, cadastro);
-        return repository.findById(id)
-                .map(existingCadastro -> {
-                    cadastro.setIdCadastrar(existingCadastro.getIdCadastrar());
-                    return repository.save(cadastro);
-                })
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Cadastro não encontrado"));
-    }
-
-    // DELETE
-    @DeleteMapping("{id}")
-    @ResponseStatus(NO_CONTENT)
-    @CacheEvict(allEntries = true)
-    public void destroy(@PathVariable Long id) {
-        log.info("Apagando cadastro: {}", id);
-        repository.deleteById(id);
-    }
+// GET
+@GetMapping("{id}")
+@ApiResponses({
+    @ApiResponse(responseCode = "200", description = "Cadastro encontrado com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Cadastro não encontrado")
+})
+public ResponseEntity<Cadastro> show(@PathVariable Long id) {
+    return repository.findById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
 }
 
+// PUT
+@PutMapping("{id}")
+@CacheEvict(allEntries = true)
+@ApiResponses({
+    @ApiResponse(responseCode = "200", description = "Cadastro atualizado com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Cadastro não encontrado")
+})
+public Cadastro update(@PathVariable Long id, @Valid @RequestBody Cadastro cadastro) {
+    log.info("Atualizando cadastro {} para {}", id, cadastro);
+    return repository.findById(id)
+            .map(existingCadastro -> {
+                cadastro.setIdCadastrar(existingCadastro.getIdCadastrar());
+                return repository.save(cadastro);
+            })
+            .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Cadastro não encontrado"));
+}
+
+// DELETE
+@DeleteMapping("{id}")
+@ResponseStatus(NO_CONTENT)
+@CacheEvict(allEntries = true)
+@ApiResponses({
+    @ApiResponse(responseCode = "204", description = "Cadastro apagado com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Cadastro não encontrado")
+})
+public void destroy(@PathVariable Long id) {
+    log.info("Apagando cadastro: {}", id);
+    repository.deleteById(id);
+}
+}
