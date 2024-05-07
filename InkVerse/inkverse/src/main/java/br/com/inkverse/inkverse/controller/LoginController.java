@@ -74,7 +74,7 @@ public Login update(@PathVariable Long id, @RequestBody Login login) {
     log.info("atualizando login {} para {}", id, login);
 
     verificarSeLoginExiste(id);
-    login.setId(Long.valueOf(id));
+    login.setIdLogin(Long.valueOf(id));
     return repository.save(login);
 }
 
