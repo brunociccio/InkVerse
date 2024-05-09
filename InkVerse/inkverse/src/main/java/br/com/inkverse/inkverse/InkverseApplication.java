@@ -28,7 +28,7 @@ public class InkverseApplication {
 		SpringApplication.run(InkverseApplication.class, args);
 	}
 
-	@RequestMapping
+	@RequestMapping("/home")
 	@ResponseBody
 	public String home(){
 		return "WebApp Inkverse";
