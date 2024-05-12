@@ -89,16 +89,16 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.springframework.ai</groupId>
-				<artifactId>spring-ai-bom</artifactId>
-				<version>0.8.1-SNAPSHOT</version>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>3.2.3</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-				<groupId>de.codecentric</groupId>
-				<artifactId>spring-boot-admin-dependencies</artifactId>
-				<version>3.2.3</version>
+				<groupId>org.springframework.ai</groupId>
+				<artifactId>spring-ai-bom</artifactId>
+				<version>0.8.1-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -123,5 +123,6 @@
 		</releases>
 		</repository>
 	</repositories>
+
 
 </project>
